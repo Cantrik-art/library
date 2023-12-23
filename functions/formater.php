@@ -63,8 +63,8 @@ function terbilang_arab($number) {
 }
 
 // Contoh penggunaan:
-$angka = 45678;
-echo terbilang_arab($angka); 
+//$angka = 45678;
+//echo terbilang_arab($angka); 
 // Output: أربعون وخمسمئة وستون ألف وسبعمئة وثمانية وسبعون
 
 // =======================================================================================================================
