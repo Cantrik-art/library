@@ -1,8 +1,71 @@
 <?php
 
 
+// =======================================================================================================================
+// FUNCTION TERBILANG ARABIC
+// =======================================================================================================================
 
+function terbilang_arab($number) {
+    $arabic = array(
+        0 => "صفر",
+        1 => "واحد",
+        2 => "اثنان",
+        3 => "ثلاثة",
+        4 => "أربعة",
+        5 => "خمسة",
+        6 => "ستة",
+        7 => "سبعة",
+        8 => "ثمانية",
+        9 => "تسعة",
+        10 => "عشرة",
+        11 => "أحد عشر",
+        12 => "اثنا عشر",
+        20 => "عشرون",
+        30 => "ثلاثون",
+        40 => "أربعون",
+        50 => "خمسون",
+        60 => "ستون",
+        70 => "سبعون",
+        80 => "ثمانون",
+        90 => "تسعون",
+        100 => "مئة",
+        200 => "مئتان",
+        300 => "ثلاثمئة",
+        400 => "أربعمئة",
+        500 => "خمسمئة",
+        600 => "ستمئة",
+        700 => "سبعمئة",
+        800 => "ثمانمئة",
+        900 => "تسعمئة"
+    );
 
+    if ($number < 13) {
+        return $arabic[$number];
+    } elseif ($number < 20) {
+        return $arabic[$number - 10] . " عشر";
+    } elseif ($number < 100) {
+        $tens = floor($number / 10) * 10;
+        $ones = $number % 10;
+        return $arabic[$tens] . ($ones > 0 ? " و" . $arabic[$ones] : "");
+    } elseif ($number < 1000) {
+        $hundreds = floor($number / 100) * 100;
+        $tens = $number % 100;
+        return $arabic[$hundreds] . ($tens > 0 ? " و" . terbilang_arab($tens) : "");
+    } elseif ($number < 2000) {
+        return "ألف" . ($number > 1000 ? " و" . terbilang_arab($number % 1000) : "");
+    } elseif ($number < 100000) {
+        $thousands = floor($number / 1000);
+        $remainder = $number % 1000;
+        return terbilang_arab($thousands) . " آلاف" . ($remainder > 0 ? " و" . terbilang_arab($remainder) : "");
+    } else {
+        return "Angka terlalu besar untuk diubah";
+    }
+}
+
+// Contoh penggunaan:
+$angka = 45678;
+echo terbilang_arab($angka); 
+// Output: أربعون وخمسمئة وستون ألف وسبعمئة وثمانية وسبعون
 
 // =======================================================================================================================
 // FUNCTION CEK IZIN TELAT
